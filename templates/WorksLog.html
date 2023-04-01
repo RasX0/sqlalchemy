@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h2 align="center">Works log</h2>
+
+
+{% for item in jobs %}
+<h3>Action # {{ loop.index }}</h3>
+<table border="2">
+    <tr>
+        <th>Title of activity</th>
+        <th>Team leader</th>
+        <th>Duration</th>
+        <th>List of collaborators</th>
+        <th>is finished</th>
+    </tr>
+    <tr>
+        <td>{{ item.job }}</td>
+        <td>{{ user.filter(user.id == item.team_leader).first() }}</td>
+        <td>{{ item.work_size }}</td>
+        <td>{{ item.collaborators }}</td>
+        <td>{% if item.is_finished % 2 == 0 %}
+        не завершена
+ {% else %}
+       завершена
+ {% endif %}</td>
+    </tr>
+</table>
+
+{% endfor %}
+{% endblock %}
